@@ -5,9 +5,12 @@ Stylesheet: ../css/index_style.css
 Author: Joshua Sendgikoski
 -->
 
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" contet="width=device-width, initial-scale=1.0">
+
     <title>Joshua Sendgikoski - About Me</title>
     <link href="CSS/index_style.css" rel="stylesheet">
 </head>
@@ -16,14 +19,134 @@ Author: Joshua Sendgikoski
 
 <body>
 
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#advocacy">Advocacy</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!--
+    Chevron "Scroll Hint"
+    -->
+    <div class="scroll-hint" aria-hidden="true">⌄</div>
+    <script>
+        const scrollHint = document.querySelector('.scroll-hint');
+
+        window.addEventListener('scroll', () => {
+            // Fades out after scrolling down 50px
+            if (window.scrollY > 500) {
+                scrollHint.classList.add('fade-out');
+            } else {
+                scrollHint.classList.remove('fade-out');
+            }
+        });
+    </script>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <div id="HL-Tau-Caption">
+        <h5>The protoplanetary disk around the young star HL Tau,
+            <br>captured by the Atacama Large Millimeter/submillimeter Array (ALMA).
+            <br><a href="https://www.eso.org/public/images/eso1436a/" target="_blank"> Learn More</a></h5>
+    </div>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
     <header class="hero-section">
         <h1>About Me</h1>
     </header>
 
-    <main class="content-section">
-        <h2>About HL Tauri</h2>
-        <p>Paragraph 1<br>Paragraph 2</p>
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <main class="content-section" id="about">
+        <div class="text-content">
+            <h2><span style="color: red;">Hi,</span> I'm Joshua</h2>
+            <p>I am an Astrophysical and Planetary Sciences student at the University of Colorado Boulder, and a graduate of Austin Community College.</p>
+            <p>As a student, I've been involved in various research from Protoplanetary Disk Spectroscopy to Computational Aeronomy,
+                and acted as a Science Policy Advocate speaking directly to Congressional Representatives in support of science.</p>
+        </div>
+
+        <div class="picture-box">
+            <img src="../Media/joshua_headshot.jpg" alt='A headshot of Joshua Sendgikoski'>
+        </div>
     </main>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!--RESEARCH-->
+    <section class="research-section" id="research">
+
+        <div class="research-picture">
+            <img src="../Media/joshua_presenting.jpg" alt="Joshua Sendgikoski presenting at the BSA REU Symposium">
+            <img src="../Media/joshua_disk_presentation.jpg" 
+            alt="Joshua Sendgikoski presenting at Austin Community College's Astronomy Club's Science Symposium">
+        </div>
+        
+
+        <div class="text-content">
+            <h2>Research</h2>
+            <p>Currently, I am working under <b>Dr. Dolon Bhattacharyya</b> and <b>Dr. Kevin France</b>
+                at the Laboratory for Atmospheric and Space Physics 
+                (<a href="https://lasp.colorado.edu" target="_blank">LASP</a>)
+                on a near-ultraviolet project with archival 
+                <a href="https://science.nasa.gov/science-research/science-enabling-technology/the-cute-mission-innovative-design-enablesobservations-of-extreme-exoplanets-from-a-smallpackage/" target="_blank">
+                    NASA CUTE</a> observations of solar system targets.</p>
+            <p>I am also an alumni of the
+                <a href="https://lasp.colorado.edu/reu/" target="_blank">Boulder Solar Alliance NSF REU</a>,
+                where I worked under <b>Dr. Katelynn Greer</b> in an Observing System Simulation Experiment (OSSE)
+            to evaluate simulated satellite observations of Joule Heating in VLEO.</p>
+            <p>Previous work also includes Protoplanetary Disk spectroscopy in infrared under <b>Dr. Andrea Banzatti</b>,
+                and Environmental Science Soil surveys of carbon respiration in varied agricultural methods under <b>Dr. Jenny Cooke</b>.</p>
+        </div>
+             
+    </section>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!--ADVOCACY-->
+    <section class="advocacy-section" id="advocacy">
+
+        <div class="advocacy-picture">
+            <img src="../Media/sendgikoski_advocacy.jpg" 
+            alt="Joshua Sendgikoski and his advocacy team during the 2026 Congressional Visits with the American Physical Society">
+            <img src="../Media/sendgikoski_ambassador_cohort.jpg" 
+            alt="Joshua Sendgikoski and some of the cohort of Student Ambassadors for the American Physical Society.">
+        </div>
+        
+
+        <div class="text-content">
+            <h2>Advocacy and outreach</h2>
+            <p>I am a two-time Student Ambassador for the
+                <a href="https://www.aps.org" target="_blank">American Physical Society</a>,
+                and through that position I've had the opportunity to advocate for science policy directly on The Hill
+                in Washington DC.
+            </p>
+            <p>In addition, I volunteer frequently with Astronomy on Tap and have developed
+                educational physics media for the Contemporary Physics Education Project (CPEP) that was shared on all company pages.</p>
+        </div>
+             
+    </section>
+
+    
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!--CONTACT INFORMATION-->
+    <section class="contact-section" id="contact">
+        <h2>Contact Me</h2>
+
+        <p class="email">
+            <a href="mailto:joshua.sendgikoski04@gmail.com">joshua.sendgikoski04@gmail.com</a>
+        </p>
+
+        <div class="social-links">
+            <a href="https://github.com/JoshSend" target="_blank" rel="noopener">
+                <img src="../Media/github_icon.jpg" alt="Joshua's Github profile">
+            </a>
+            <a href="https://www.linkedin.com/in/joshua-sendgikoski/" target="_blank" rel="noopener">
+                <img src="../Media/linkedin_icon.jpg" alt="Joshua's LinkedIn page">
+            </a>
+        </div>
+    </section>
 
 </body>
 
