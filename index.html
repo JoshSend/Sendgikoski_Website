@@ -11,25 +11,27 @@ Author: Joshua Sendgikoski
     <meta charset="UTF-8">
     <meta name="viewport" contet="width=device-width, initial-scale=1.0">
 
-    <title>Joshua Sendgikoski - About Me</title>
-    <link href="index_style.css" rel="stylesheet">
+    <title>Home — Joshua Sendgikoski</title>
+    <link href="/main_style.css" rel="stylesheet">
 </head>
 
 <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 
-<body>
+<body id="home">
 
     <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
     <!-- Navigation Bar -->
     <nav class="navbar">
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#advocacy">Advocacy</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+        <ul>
+            <li><a href="/index.html" class="active">About</a></li>
+            <li><a href="/research.html">Research</a></li>
+            <li><a href="/publication.html">Publication</a></li>
+            <li><a href="/outreach.html">Outreach</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/CV.html">CV</a></li>
+            <li><a href="/index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
 
     <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
     <!--
@@ -73,131 +75,17 @@ Author: Joshua Sendgikoski
                 You can find my CV 
                 <a href="../Media/CV/Joshua_Sendgikoski_CV.pdf" target="_blank">here</a>. (Last updated August 2026)
             </p>
+            <ul>
+                <li><b>12</b> IRTF Observing Nights</li>
+                <li><b>2x</b> American Physical Society Student Ambassador</li>
+                <li><b>$20.7k</b> Grants & Awards</li>
+            </ul>
         </div>
 
         <div class="picture-box">
             <img src="../Media/joshua_headshot.jpg" alt='A headshot of Joshua Sendgikoski'>
         </div>
     </main>
-
-    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-    <!--RESEARCH-->
-    <section class="research-section" id="research">
-
-        <div class="research-picture">
-            <img src="../Media/joshua_presenting.jpg" alt="Joshua Sendgikoski presenting at the BSA REU Symposium">
-            <img src="../Media/joshua_disk_presentation.jpg" 
-            alt="Joshua Sendgikoski presenting at Austin Community College's Astronomy Club's Science Symposium">
-        </div>
-        
-
-        <div class="text-content">
-            <h2>Research</h2>
-            <p>Currently, I am working under <b>Dr. Dolon Bhattacharyya</b> and <b>Dr. Kevin France</b>
-                at the Laboratory for Atmospheric and Space Physics 
-                (<a href="https://lasp.colorado.edu" target="_blank">LASP</a>)
-                on a near-ultraviolet project with archival 
-                <a href="https://science.nasa.gov/science-research/science-enabling-technology/the-cute-mission-innovative-design-enablesobservations-of-extreme-exoplanets-from-a-smallpackage/" target="_blank">
-                    NASA CUTE</a> observations of solar system targets.</p>
-            <p>I am also an alumni of the
-                <a href="https://lasp.colorado.edu/reu/" target="_blank">Boulder Solar Alliance NSF REU</a>,
-                where I worked under <b>Dr. Katelynn Greer</b> in an Observing System Simulation Experiment (OSSE)
-            to evaluate simulated satellite observations of Joule Heating in VLEO.</p>
-            <p>Previous work includes Protoplanetary Disk spectroscopy in infrared under <b>Dr. Andrea Banzatti</b> where I had 12
-            night observations with the 
-            <a href="https://irtfweb.ifa.hawaii.edu/~ishell/" target="_blank">NASA IRTF iSHELL</a> telescope, 
-            and even Environmental Science Soil surveys of carbon respiration in varied agricultural methods under <b>Dr. Jenny Cooke</b>.</p>
-        </div>
-             
-    </section>
-
-    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-    <!--ADVOCACY-->
-    <section class="advocacy-section" id="advocacy">
-
-        <div class="text-content">
-            <h2>Advocacy and outreach</h2>
-            <p>I am a two-time Student Ambassador for the
-                <a href="https://www.aps.org" target="_blank">American Physical Society</a>,
-                and through that position I've had the opportunity to advocate for science policy directly on The Hill
-                in Washington DC.
-            </p>
-            <p>In addition, I volunteer frequently with Astronomy on Tap and have developed
-                educational physics media for the Contemporary Physics Education Project (CPEP) that was shared on all company pages.</p>
-        </div>
-
-        <div class="advocacy-picture">
-            <img src="../Media/sendgikoski_advocacy.jpg" 
-            alt="Joshua Sendgikoski and his advocacy team during the 2026 Congressional Visits with the American Physical Society">
-            <img src="../Media/sendgikoski_ambassador_cohort.jpg" 
-            alt="Joshua Sendgikoski and some of the cohort of Student Ambassadors for the American Physical Society.">
-        </div>
-             
-    </section>
-
-    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
-    <!--GALLERY-->
-    <section class="gallery-section" id="gallery">
-        <h2>Gallery</h2>
-
-        <div class="gallery">
-            <div class="slides">
-                <img src="../Media/Gallery/boulder_reu.jpg" alt="Description"
-                class="slide"
-                data-caption="The opening week of the 2026 Boulder Solar Alliance REU at LASP">
-
-                <img src="../Media/Gallery/acc_seds_teams.png" alt="Descriptive alt text 1"
-                    class="slide" 
-                    data-caption="The 2025 International Rocketry Engineering Competition (IREC)
-                    where I competed in the ACC SEDS team.">
-
-                <img src="../Media/Gallery/hiking1.jpg" alt="Descriptive alt text 2"
-                    class="slide" data-caption="Overlooking Boulder, Colorado from nearby the Flatirons formation.">
-
-                <img src="../Media/Gallery/mountain1.jpg" alt="Descriptive alt text 3"
-                    class="slide" data-caption="Looking up at Lumpy Ridge Mountain in Estes Park, Colorado">
-
-                <img src="../Media/Gallery/mountain2.jpg" alt="Overlooking view of Gem Lake in Estes Park, Colorado"
-                    class="slide" data-caption="Overlooking view of Gem Lake in Estes Park, Colorado">
-
-                <img src="../Media/Gallery/mountain3.jpg" alt="Description"
-                class="slide"
-                data-caption="Looking up at Indian Peak from the Rainbow Lakes nearby Nederland, Colorado">
-                
-                <img src="../Media/Gallery/flower3.jpg" alt="akt"
-                class="slide"
-                data-caption="Small meadow just outside LASP in Boulder, Colorado">
-            </div>
-
-
-            <button class="gallery-arrow prev" aria-label="Previous image">‹</button>
-            <button class="gallery-arrow next" aria-label="Next image">›</button>
-        </div>
-
-        <p class="gallery-caption">The 2025 International Rocketry Engineering Competition (IREC)
-                    where I competed in the ACC SEDS team.</p>
-    </section>
-    
-    <script>
-        document.querySelectorAll('.gallery').forEach(function (gallery) {
-            const slides  = gallery.querySelectorAll('.slide');
-            const caption = gallery.parentElement.querySelector('.gallery-caption');
-            let index = 0;
-
-            function show(newIndex) {
-                slides[index].classList.remove('active');
-                index = (newIndex + slides.length) % slides.length;   // wrap at both ends
-                slides[index].classList.add('active');
-                if (caption) {
-                    caption.textContent = slides[index].dataset.caption || '';
-                }
-            }
-            show(index);
-
-            gallery.querySelector('.next').addEventListener('click', () => show(index + 1));
-            gallery.querySelector('.prev').addEventListener('click', () => show(index - 1));
-        });
-    </script>
     
     <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
     <!--CONTACT INFORMATION-->

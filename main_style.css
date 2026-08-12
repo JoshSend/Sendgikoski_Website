@@ -3,7 +3,7 @@ CSS Stylesheet for ../HTML/index.html
 Author: Joshua Sendgikoski
 */
 
-body {
+body#home{
     margin:0;
     padding: 0;
     font-family: Georgia;
@@ -25,12 +25,190 @@ body {
     gap: 10px;
 }
 
+body#CV{
+    margin:0;
+    padding: 0;
+    font-family: Georgia;
+    color: #ffffff;
+    background-color: #000000;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+}
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: Georgia;
+    color: #ffffff;
+    background-color: #000000;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* Navigation Bar */
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;                              
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);       
+    backdrop-filter: blur(8px);                 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar ul{
+    list-style: none;              
+    margin: 0;
+    padding: 0 60px;
+    display: flex;
+    justify-content: right;
+    gap: 30px;
+}
+
+.navbar a{
+    display: block;
+    color: #ffffff;                
+    text-decoration: none;         
+    padding: 20px 0px;
+    font-size: 1rem;               /* your scale — tune to taste */
+    letter-spacing: 2px;
+    transition: color 0.2s ease;
+}
+
+.navbar a:hover{
+    color: #3399ff;                
+}
+
+.navbar a.active{
+    border-bottom: 2px solid #3399ff;
+    color: #3399ff;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* Hyperlink*/
 a {
     color:#3399ff;
 }
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
+/* Interior page banner */
+.page-banner{
+    position: relative;
+    width: 100%;
+    height: 45vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-banner img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* fills the banner, crops overflow */
+}
+
+.page-banner::after{          /* dark overlay so the title stays readable */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.65));
+}
+
+.page-banner h1{
+    position: relative;       /* lifts the title above the overlay */
+    z-index: 1;
+    font-size: 5rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+    margin: 0;
+}
+
+.page-banner .subtitle{
+    font-size: 1.2rem;
+    z-index: 10;
+    margin-top: 10;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* Interior content card */
+.page-content{
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    width: 85%;
+    max-width: 1000px;
+    margin: -80px auto 60px auto;   /* negative top = card overlaps banner */
+    padding: 50px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+.image-credit {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 3px 8px;
+    border-radius: 3px;
+    backdrop-filter: blur(2px);
+    z-index: 2;
+}
+
+.image-credit a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+    
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* PDF Viewer Toolbar */
+.pdf-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: -150px auto 60px auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Seamless PDF Embed */
+.pdf-viewer {
+    width: 100%;
+    height: 85vh;
+    min-height: 800px;
+    border: none;
+    border-radius: 8px;
+    display: block;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #HL-Tau-Caption {
     position: absolute;
     bottom: 30px;              
@@ -79,7 +257,8 @@ a {
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* Black Content Box Card */
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* About Me */
 .content-section{
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
@@ -113,6 +292,10 @@ a {
     margin-bottom: 15px;
 }
 
+.content-section ul{
+    list-style-type: none;
+}
+
 .picture-box{
     flex: 0 0 500px;
     height: 500px;
@@ -125,6 +308,122 @@ a {
     height: auto;
     object-fix: cover;
     display: block;
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* PUBLICATIONS & PRESENTATIONS PAGE */
+
+.pub-group {
+    margin-bottom: 50px;
+}
+
+.pub-group h2 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    border-bottom: 2px solid rgba(51, 153, 255, 0.4);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Base Publication Card */
+.pub-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #3399ff;
+    border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pub-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-left-color: #66b2ff;
+    transform: translateX(4px);
+}
+
+/* Layout Header (Title + Bibcode/Date) */
+.pub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 8px;
+}
+
+.pub-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.bibcode-link {
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: #3399ff;
+    text-decoration: none;
+    white-space: nowrap;
+    background: rgba(51, 153, 255, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(51, 153, 255, 0.2);
+    transition: background 0.2s ease;
+}
+
+.bibcode-link:hover {
+    background: rgba(51, 153, 255, 0.25);
+    text-decoration: none;
+}
+
+.pub-authors, 
+.pub-venue {
+    font-size: 1.05rem;
+    color: #d1d5db;
+    margin: 4px 0 10px 0;
+}
+
+.pub-date {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    white-space: nowrap;
+}
+
+/* Specific highlight section for specific contribution */
+.pub-contribution {
+    font-size: 1rem;
+    color: #e5e7eb;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 14px;
+    border-radius: 6px;
+    border-left: 2px solid #3399ff;
+    margin-top: 12px;
+}
+
+.pub-details {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
+/* Mobile Responsive adjustment */
+@media (max-width: 768px) {
+    .pub-header {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .pub-card {
+        padding: 18px 20px;
+    }
+
+    .pub-title {
+        font-size: 1.15rem;
+    }
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -303,41 +602,6 @@ a {
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-/* Navigation Bar */
-.navbar{
-    position: sticky;
-    top: 0;
-    z-index: 1000;                              
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);       
-    backdrop-filter: blur(8px);                 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.navbar ul{
-    list-style: none;              
-    margin: 0;
-    padding: 0 60px;
-    display: flex;
-    justify-content: right;
-    gap: 30px;
-}
-
-.navbar a{
-    display: block;
-    color: #ffffff;                
-    text-decoration: none;         
-    padding: 20px 0px;
-    font-size: 1rem;               /* your scale — tune to taste */
-    letter-spacing: 2px;
-    transition: color 0.2s ease;
-}
-
-.navbar a:hover{
-    color: #3399ff;                
-}
-
-
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* ALL MEDIA / RESPONSIVE STYLES */
 

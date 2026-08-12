@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+Gallery
+Stylesheet: /main_style.css
+Author: Joshua Sendgikoski
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Joshua Sendgikoski</title>
+    <link href="gallery_style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/index.html">About</a></li>
+            <li><a href="/research.html">Research</a></li>
+            <li><a href="/publication.html">Publication</a></li>
+            <li><a href="/outreach.html">Outreach</a></li>
+            <li><a href="/gallery.html" class="active">Gallery</a></li>
+            <li><a href="/CV.html">CV</a></li>
+            <li><a href="/index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+    <main class="gallery-page-container">
+        <header class="gallery-header">
+            <h1>Gallery</h1>
+            <p>Fieldwork, adventures, and life outside the lab.</p>
+        </header>
+
+        <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+        <!-- MASONRY GRID -->
+        <section class="masonry-grid" id="masonryGrid">
+            <div class="grid-item tall">
+                <img src="../Media/Gallery/boulder_reu.jpg" alt="Boulder Solar Alliance REU" 
+                data-caption="The opening week of the 2026 Boulder Solar Alliance REU at LASP">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/acc_seds.jpg" alt="LASP Meadow" 
+                data-caption="The 2025 International Rocketry Engineering Competition (IREC)
+                where I competed in the ACC Students for the Exploration and Development of Space (SEDS) team
+                with our rocket Space Cowboy in the 10k COTS category">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item wide">
+                <img src="../Media/Gallery/acc_seds_teams.png" alt="ACC SEDS Team" 
+                data-caption="The 2025 International Rocketry Engineering Competition (IREC) Texas teams">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/hiking1.jpg" alt="Flatirons Hiking" 
+                data-caption="Overlooking Boulder, Colorado from nearby the Flatirons formation">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item tall">
+                <img src="../Media/Gallery/mountain1.jpg" alt="Lumpy Ridge Mountain" 
+                data-caption="Looking up at Lumpy Ridge Mountain in Estes Park, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/mountain2.jpg" alt="Gem Lake" 
+                data-caption="Overlooking view of Gem Lake in Estes Park, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item wide">
+                <img src="../Media/Gallery/mountain3.jpg" alt="Indian Peak" 
+                data-caption="Looking up at Indian Peak from the Rainbow Lakes nearby Nederland, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/flower3.jpg" alt="LASP Meadow" 
+                data-caption="Small meadow just outside LASP in Boulder, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/flower1.jpg" alt="LASP Meadow" 
+                data-caption="A pink flower in a garden just outside of Chatauqua park in Boulder, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/flower2.jpg" alt="LASP Meadow" 
+                data-caption="Yellow flowers in the morning outside LASP">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/flower4.jpg" alt="LASP Meadow" 
+                data-caption="An interesting flower in someone's garden in Boulder, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/flower5.jpg" alt="LASP Meadow" 
+                data-caption="A wild dandelion in a small meadow">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/mountain4.jpg" alt="Gem Lake" 
+                data-caption="Looking away from Boulder from the top of Flagstaff Mountain in Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+
+            <div class="grid-item">
+                <img src="../Media/Gallery/bear1.jpg" alt="Gem Lake" 
+                data-caption="A juvenile bear in Boulder, Colorado">
+                <div class="overlay"><span class="view-btn">View</span></div>
+            </div>
+            
+        </section>
+    </main>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">&times;</button>
+        <button class="lightbox-arrow prev" id="prevBtn" aria-label="Previous image">&#10094;</button>
+        <button class="lightbox-arrow next" id="nextBtn" aria-label="Next image">&#10095;</button>
+
+        <div class="lightbox-content">
+            <div class="image-wrapper">
+                <img id="lightboxImg" src="" alt="">
+            </div>
+            <p id="lightboxCaption" class="lightbox-caption"></p>
+        </div>
+
+        <div class="lightbox-thumbnails" id="lightboxThumbnails"></div>
+    </div>
+
+    <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridItems = Array.from(document.querySelectorAll('.grid-item'));
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const thumbnailsContainer = document.getElementById('lightboxThumbnails');
+
+            let currentIndex = 0;
+
+            gridItems.forEach((item, index) => {
+                const img = item.querySelector('img');
+                const thumb = document.createElement('img');
+                thumb.src = img.src;
+                thumb.alt = img.alt;
+                thumb.classList.add('thumb');
+                thumb.addEventListener('click', () => openLightbox(index));
+                thumbnailsContainer.appendChild(thumb);
+
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            function openLightbox(index) {
+                currentIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            function updateLightbox() {
+                const currentImg = gridItems[currentIndex].querySelector('img');
+                lightboxImg.src = currentImg.src;
+                lightboxImg.alt = currentImg.alt;
+                lightboxCaption.textContent = currentImg.dataset.caption || '';
+
+                const thumbs = thumbnailsContainer.querySelectorAll('.thumb');
+                thumbs.forEach((t, i) => {
+                    t.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % gridItems.length;
+                updateLightbox();
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + gridItems.length) % gridItems.length;
+                updateLightbox();
+            }
+
+            nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+            prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+            lightboxClose.addEventListener('click', closeLightbox);
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            });
+        });
+    </script>
+</body>
+</html>
