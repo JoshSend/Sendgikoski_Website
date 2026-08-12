@@ -1,12 +1,38 @@
 /*
 CSS Stylesheet for /gallery.html
 Author: Joshua Sendgikoski
+Responsive pass: box-sizing reset, fluid masonry grid, fluid lightbox.
 */
 
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* GLOBAL RESET & RESPONSIVE SAFETY NET      */
+/* (gallery.html loads ONLY this file, so it */
+/*  needs its own copy of these rules.)      */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 body{
     margin:0;
     padding: 0;
-    font-family: Georgia;
+    font-family: Georgia, 'Times New Roman', serif;
     color: #ffffff;
     background-color: #000000;
 
@@ -23,34 +49,40 @@ body{
 .navbar{
     position: sticky;
     top: 0;
-    z-index: 1000;                              
+    z-index: 1000;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);       
-    backdrop-filter: blur(8px);                 
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar ul{
-    list-style: none;              
+    list-style: none;
     margin: 0;
     padding: 0 60px;
     display: flex;
-    justify-content: right;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 30px;
 }
 
 .navbar a{
     display: block;
-    color: #ffffff;                
-    text-decoration: none;         
+    color: #ffffff;
+    text-decoration: none;
     padding: 20px 0px;
-    font-size: 1rem;               /* your scale — tune to taste */
+    font-size: 1rem;
     letter-spacing: 2px;
     transition: color 0.2s ease;
 }
 
 .navbar a:hover{
-    color: #3399ff;                
+    color: #3399ff;
+}
+
+.navbar a:focus-visible{
+    outline: 2px solid #3399ff;
+    outline-offset: 4px;
 }
 
 .navbar a.active{
@@ -80,7 +112,7 @@ a {
 }
 
 .gallery-header h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.2rem, 7vw, 3.5rem);
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #ffffff;
@@ -88,14 +120,16 @@ a {
 }
 
 .gallery-header p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: #a0aec0;
 }
 
-/* CSS Grid with Auto-Fit for Masonry Feel */
+/* CSS Grid with Auto-Fit for Masonry Feel.
+   min() keeps the minimum column from ever being wider than the
+   screen, which is what stops narrow phones from scrolling sideways. */
 .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     grid-auto-rows: 250px;
     grid-auto-flow: dense;
     gap: 20px;
@@ -249,7 +283,7 @@ a {
 
 .lightbox-caption {
     margin-top: 15px;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: #e2e8f0;
     text-align: center;
     max-width: 800px;
@@ -274,6 +308,7 @@ a {
     cursor: pointer;
     border: 2px solid transparent;
     transition: opacity 0.2s, border-color 0.2s;
+    flex: 0 0 auto;                 /* thumbnails keep their size and scroll sideways */
 }
 
 .lightbox-thumbnails .thumb.active,
@@ -283,94 +318,31 @@ a {
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-/* ALL MEDIA / RESPONSIVE STYLES */
+/* RESPONSIVE / MEDIA QUERIES */
 
-/* Responsive adjustments */
+/* Tablets (<= 900px): slightly shorter rows so images aren't too tall */
+@media (max-width: 900px) {
+    .masonry-grid {
+        grid-auto-rows: 220px;
+    }
+}
+
+/* Phones (<= 768px): single column, and drop the wide/tall spans
+   so every photo gets a full, uncropped cell. */
 @media (max-width: 768px) {
     .masonry-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: 220px;
+        grid-auto-rows: 240px;
     }
 
-    .grid-item.wide, .grid-item.tall {
+    .grid-item.wide,
+    .grid-item.tall {
         grid-column: span 1;
         grid-row: span 1;
     }
 
+    .lightbox-close { top: 12px; right: 16px; font-size: 2.4rem; }
+    .lightbox-arrow { width: 40px; height: 40px; }
     .lightbox-arrow.prev { left: 10px; }
     .lightbox-arrow.next { right: 10px; }
-}
-
-/* Tablets & Small Laptops (under 1024px) */
-@media (max-width: 1024px) {
-    .content-section,
-    .research-section {
-        flex-direction: column;
-    }
-
-    .picture-box,
-    .gallery {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    /* Reduce section margins & padding so content has room */
-    .gallery-section,
-    .content-section,
-    .research-section {
-        width: 92%;
-        padding: 30px 20px;
-    }
-
-    /* Scale down large section headings */
-    .gallery-section h2,
-    .research-section h2 {
-        font-size: 3rem;
-    }
-
-    /* Adjust gallery height for tablet viewports */
-    .gallery {
-        height: 500px;
-    }
-}
-
-/* Mobile Phones (under 768px) */
-@media (max-width: 768px) {
-    /* Tighten container padding for narrow screens */
-    .gallery-section,
-    .content-section,
-    .research-section {
-        width: 95%;
-        padding: 20px 12px;
-        margin: 15px auto;
-    }
-
-    /* Scale headings down for phone screens */
-    .gallery-section h2,
-    .research-section h2 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-
-    /* Scale captions down */
-    .gallery-caption {
-        font-size: 1.1rem;
-        line-height: 1.3;
-    }
-
-    /* Reduce gallery height so it doesn't take up the whole screen on vertical phones */
-    .gallery {
-        height: 320px;
-        border-radius: 10px;
-    }
-
-    /* Make carousel arrows touch-friendly and bring them slightly inward */
-    .gallery-arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 1.4rem;
-    }
-    .gallery-arrow.prev { left: 8px; }
-    .gallery-arrow.next { right: 8px; }
 }

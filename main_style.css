@@ -1,12 +1,42 @@
 /*
 Primary CSS Stylesheet for website
 Author: Joshua Sendgikoski
+Responsive pass: box-sizing reset, fluid type via clamp(),
+flexible two-column sections, wrapping mobile navbar, responsive iframe.
 */
 
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+/* GLOBAL RESET & RESPONSIVE SAFETY NET      */
+/* These three rules prevent 90% of "why is  */
+/* my phone scrolling sideways?" problems.   */
+
+*, *::before, *::after {
+    box-sizing: border-box;      /* padding + border count INSIDE width, so nothing overflows */
+}
+
+html {
+    overflow-x: hidden;          /* belt-and-suspenders: kill any accidental sideways scroll */
+}
+
+img {
+    max-width: 100%;             /* images can never grow wider than their container */
+}
+
+/* Respect users who ask their OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 body#home{
     margin:0;
     padding: 0;
-    font-family: Georgia;
+    font-family: Georgia, 'Times New Roman', serif;
     color: #ffffff;
 
     /* Background Image*/
@@ -25,25 +55,11 @@ body#home{
     gap: 10px;
 }
 
-body#CV{
-    margin:0;
-    padding: 0;
-    font-family: Georgia;
-    color: #ffffff;
-    background-color: #000000;
-
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 10px;
-}
-
+body#CV,
 body{
     margin:0;
     padding: 0;
-    font-family: Georgia;
+    font-family: Georgia, 'Times New Roman', serif;
     color: #ffffff;
     background-color: #000000;
 
@@ -60,34 +76,40 @@ body{
 .navbar{
     position: sticky;
     top: 0;
-    z-index: 1000;                              
+    z-index: 1000;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);       
-    backdrop-filter: blur(8px);                 
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar ul{
-    list-style: none;              
+    list-style: none;
     margin: 0;
     padding: 0 60px;
     display: flex;
-    justify-content: right;
+    flex-wrap: wrap;               /* links drop to a new line instead of overflowing */
+    justify-content: flex-end;
     gap: 30px;
 }
 
 .navbar a{
     display: block;
-    color: #ffffff;                
-    text-decoration: none;         
+    color: #ffffff;
+    text-decoration: none;
     padding: 20px 0px;
-    font-size: 1rem;               /* your scale — tune to taste */
+    font-size: 1rem;
     letter-spacing: 2px;
     transition: color 0.2s ease;
 }
 
 .navbar a:hover{
-    color: #3399ff;                
+    color: #3399ff;
+}
+
+.navbar a:focus-visible{         /* keyboard users can see where they are */
+    outline: 2px solid #3399ff;
+    outline-offset: 4px;
 }
 
 .navbar a.active{
@@ -107,12 +129,14 @@ a {
 .page-banner{
     position: relative;
     width: 100%;
-    height: 45vh;
+    height: clamp(240px, 45vh, 480px);   /* never taller than needed on tall phones */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    text-align: center;
 }
 
 .page-banner img{
@@ -133,7 +157,7 @@ a {
 .page-banner h1{
     position: relative;       /* lifts the title above the overlay */
     z-index: 1;
-    font-size: 5rem;
+    font-size: clamp(2.5rem, 8vw, 5rem);   /* fluid: shrinks on phones, caps at 5rem */
     text-transform: uppercase;
     letter-spacing: 4px;
     text-shadow: 0 4px 10px rgba(0,0,0,0.8);
@@ -141,10 +165,11 @@ a {
 }
 
 .page-banner .subtitle{
-    font-size: 1.2rem;
+    position: relative;
     z-index: 10;
-    margin-top: 10;
-    margin-bottom: 0;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    max-width: 700px;
+    margin: 10px auto 0 auto;
     font-weight: normal;
 }
 
@@ -154,15 +179,16 @@ a {
     z-index: 2;
     background-color: rgba(0,0,0,0.7);
     backdrop-filter: blur(8px);
-    width: 85%;
-    max-width: 1000px;
+    width: 88%;
+    max-width: 1200px;
     margin: -80px auto 60px auto;   /* negative top = card overlaps banner */
-    padding: 50px;
+    padding: clamp(24px, 5vw, 50px);
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.1);
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    font-size: 1.5rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.5rem);
     line-height: 1.6;
+    overflow-wrap: break-word;      /* long links/URLs wrap instead of overflowing */
 }
 
 .image-credit {
@@ -181,7 +207,6 @@ a {
 .image-credit a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: underline;
-    
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -190,9 +215,9 @@ a {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: -150px auto 60px auto;
-    padding: 0;
+    padding: 0 15px;
     background: transparent;
     border: none;
     box-shadow: none;
@@ -202,7 +227,7 @@ a {
 .pdf-viewer {
     width: 100%;
     height: 85vh;
-    min-height: 800px;
+    min-height: 600px;
     border: none;
     border-radius: 8px;
     display: block;
@@ -211,11 +236,11 @@ a {
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 #HL-Tau-Caption {
     position: absolute;
-    bottom: 30px;              
-    right: 30px;               
-    max-width: 85%;
-    font-size: 1rem;
-    text-align: right;         
+    bottom: 30px;
+    right: 30px;
+    max-width: min(85%, 520px);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    text-align: right;
 }
 
 /* Chevron Scroll Hint */
@@ -247,10 +272,11 @@ a {
     margin-top: 100dvh;
     margin-bottom: 30px;
     text-align: center;
+    padding: 0 20px;
 }
 
 .hero-section h1{
-    font-size: 4rem;
+    font-size: clamp(2.2rem, 7vw, 4rem);
     text-transform: uppercase;
     letter-spacing: 4px;
     margin: 0;
@@ -262,29 +288,32 @@ a {
 .content-section{
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
-    padding: 50px;
-    width: 85%;
-    max-width: 5000px;
+    padding: clamp(24px, 4vw, 50px);
+    width: 88%;
+    max-width: 1400px;
     margin: 0 auto;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
 
     display: flex;
+    flex-wrap: wrap;                       /* columns stack when they run out of room */
     align-items: center;
     justify-content: space-between;
-    gap: 100px;
+    gap: clamp(40px, 6vw, 100px);
 }
 
 .text-content{
-    flex: 1;
+    flex: 1 1 340px;                        /* small basis; grows to fill — never forces a wrap */
+    min-width: 0;                           /* lets the column shrink instead of overflowing */
+    container-type: inline-size;            /* headings below can size to THIS column's width */
 }
 
 .text-content .text-caption{
     font-size:1.3em;
     font-style: italic;
     padding: 0;
-    margin: 0 0 25 px 0;
+    margin: 0 0 25px 0;
     color:#9ca3af;
     list-style-type: none;
 }
@@ -305,15 +334,18 @@ a {
 }
 
 .content-section h2{
-    font-size: 4rem;
+    /* 8cqi = 8% of the text column's width, so the heading always fits the column */
+    font-size: clamp(1.75rem, 9cqi, 3.5rem);
+    overflow-wrap: break-word;              /* last-resort safety: can never escape the box */
     margin-top: 0;
     margin-bottom: 15px;
 }
 
 .content-section p{
-    font-size: 1.5rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.5rem);
     line-height: 1.6;
     margin-bottom: 15px;
+    overflow-wrap: break-word;              /* safe: only body text may break a long word */
 }
 
 .content-section ul{
@@ -321,16 +353,16 @@ a {
 }
 
 .picture-box{
-    flex: 0 0 500px;
-    height: 500px;
+    flex: 0 0 clamp(300px, 38vw, 560px);   /* circle scales with the viewport */
+    aspect-ratio: 1 / 1;                    /* stays a perfect circle at any size */
     overflow: hidden;
-    border-radius: 600px;
+    border-radius: 50%;
 }
 
 .picture-box img{
     width: 100%;
-    height: auto;
-    object-fix: cover;
+    height: 100%;
+    object-fit: cover;                      /* fixed typo (was object-fix) */
     display: block;
 }
 
@@ -342,7 +374,7 @@ a {
 }
 
 .pub-group h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #ffffff;
@@ -359,6 +391,7 @@ a {
     border-radius: 0 10px 10px 0;
     padding: 24px 28px;
     margin-bottom: 20px;
+    overflow-wrap: break-word;
     transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -372,18 +405,21 @@ a {
 /* Layout Header (Title + Bibcode/Date) */
 .pub-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: 20px;
+    gap: 10px 20px;
     margin-bottom: 8px;
 }
 
 .pub-title {
-    font-size: 1.35rem;
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
     font-weight: 600;
     color: #ffffff;
     margin: 0;
     line-height: 1.4;
+    flex: 1 1 240px;
+    min-width: 0;
 }
 
 .bibcode-link {
@@ -404,7 +440,7 @@ a {
     text-decoration: none;
 }
 
-.pub-authors, 
+.pub-authors,
 .pub-venue {
     font-size: 1.05rem;
     color: #d1d5db;
@@ -434,45 +470,31 @@ a {
     margin-top: 8px;
 }
 
-/* Mobile Responsive adjustment */
-@media (max-width: 768px) {
-    .pub-header {
-        flex-direction: column;
-        gap: 6px;
-    }
-    
-    .pub-card {
-        padding: 18px 20px;
-    }
-
-    .pub-title {
-        font-size: 1.15rem;
-    }
-}
-
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /* Research / Advocacy Section */
 .research-section,
 .advocacy-section{
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
-    padding: 40px;
-    width: 85%;
-    max-width: 5000px;
+    padding: clamp(24px, 4vw, 40px);
+    width: 88%;
+    max-width: 1400px;
     margin: 30px auto;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
 
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 100px;
+    gap: clamp(40px, 6vw, 100px);
 }
 
 .research-section h2,
 .advocacy-section h2{
-    font-size: 4rem;
+    font-size: clamp(1.75rem, 9cqi, 3.5rem);
+    overflow-wrap: break-word;
     text-transform:uppercase;
     text-align: center;
     margin-top: 0;
@@ -481,15 +503,16 @@ a {
 
 .research-section p,
 .advocacy-section p{
-    font-size: 1.5rem;
+    font-size: clamp(1.05rem, 2.5vw, 1.5rem);
     line-height: 1.6;
     margin-bottom: 15px;
+    overflow-wrap: break-word;              /* safe: only body text may break a long word */
 }
-
 
 .research-picture,
 .advocacy-picture{
-    flex: 0 0 600px;
+    flex: 1.15 1 340px;                    /* grows a touch larger than the text column */
+    min-width: 0;                          /* allow shrink so it stays beside the text */
     overflow: hidden;
 
     display: flex;
@@ -502,16 +525,34 @@ a {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 8px;
+}
+
+/* Responsive video embed (outreach page).
+   CSS width/height override the iframe's width="600" height="400" attributes. */
+.advocacy-video{
+    flex: 1.15 1 340px;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.advocacy-video iframe{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;                    /* matches the original 600x400 shape */
+    border: none;
+    border-radius: 12px;
+    display: block;
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-/* Photo Gallery Section */
+/* Photo Gallery Section (carousel) */
 .gallery-section{
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
-    padding: 40px;
-    width: 85%;
-    max-width: 5000px;
+    padding: clamp(24px, 4vw, 40px);
+    width: 88%;
+    max-width: 1400px;
     margin: 30px auto;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -520,7 +561,7 @@ a {
 }
 
 .gallery-section h2{
-    font-size: 4rem;
+    font-size: clamp(2rem, 6vw, 4rem);
     text-transform: uppercase;
     margin-top: 0;
     margin-bottom: 30px;
@@ -528,10 +569,10 @@ a {
 
 /* Gallery / carousel */
 .gallery{
-    position: relative;            /* anchors the arrows over the image */
+    position: relative;
     width: 100%;
-    max-width: 1200px;             /* width lever */
-    height: 650px;                /* height lever — keep or change to taste */
+    max-width: 1400px;
+    height: clamp(320px, 55vh, 650px);     /* fluid height instead of fixed 650px */
     margin: 0 auto;
     overflow: hidden;
     border-radius: 16px;
@@ -540,12 +581,12 @@ a {
 .gallery .slide{
     width: 100%;
     height: 100%;
-    object-fit: cover;             /* fills the box, crops overflow */
-    display: none;                 /* hide all slides... */
+    object-fit: cover;
+    display: none;
 }
 
 .gallery .slide.active{
-    display: block;                /* ...show only the active one */
+    display: block;
 }
 
 .gallery .slide.vertical{
@@ -574,10 +615,10 @@ a {
 .gallery-arrow.next{ right: 20px; }
 
 .gallery-caption{
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
     line-height: 1.4;
     margin-top: 15px;
-    min-height: 1.4em;             /* reserves space so short/long captions don't jolt the layout */
+    min-height: 1.4em;
 }
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -585,10 +626,10 @@ a {
 .contact-section{
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
-    padding: 40px;
-    width: 85%;
-    max-width: 5000px;
-    margin: 30px auto 60px auto;   
+    padding: clamp(24px, 4vw, 40px);
+    width: 88%;
+    max-width: 1400px;
+    margin: 30px auto 60px auto;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
@@ -596,7 +637,7 @@ a {
 }
 
 .contact-section h2{
-    font-size: 4rem;
+    font-size: clamp(2rem, 6vw, 4rem);
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-top: 0;
@@ -604,7 +645,8 @@ a {
 
 .email a{
     color: #ffffff;
-    font-size: 1.5rem;   
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    overflow-wrap: break-word;
 }
 
 .social-links{
@@ -621,7 +663,7 @@ a {
 }
 
 .social-links a:hover img{
-    transform: scale(1.15);   
+    transform: scale(1.15);
     opacity: 0.8;
 }
 
@@ -630,19 +672,19 @@ a {
 
 .hero-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     margin-top: 25px;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .stat-card {
     background-color: rgba(0,0,0,0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
     padding: 14px 18px;
     border-radius: 10px;
-    flex: 1;
+    flex: 1 1 140px;
     min-width: 120px;
     text-align: center;
     transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
@@ -656,7 +698,7 @@ a {
     display: block;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #3399ff; /* Accent blue matching your links */
+    color: #3399ff;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.1;
     margin-bottom: 6px;
@@ -667,87 +709,78 @@ a {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    /* color: #a0aec0; */
     font-weight: 500;
     line-height: 1.3;
 }
 
-/* Responsive collapse for small screens */
-@media (max-width: 600px) {
-    .hero-stats {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-/* ALL MEDIA / RESPONSIVE STYLES */
+/* RESPONSIVE / MEDIA QUERIES                */
+/* Headings/paddings already scale via clamp,*/
+/* so these only handle LAYOUT changes.      */
 
-/* Tablets & Small Laptops (under 1024px) */
-@media (max-width: 1024px) {
+/* Tablets & small laptops (<= 1200px):
+   force the two-column sections to a single stacked column. Stacking here
+   (rather than 1024px) guarantees the text column is wide enough for long
+   uppercase headings like "PROTOPLANETARY" before they'd have to wrap. */
+@media (max-width: 1200px) {
     .content-section,
-    .research-section {
+    .research-section,
+    .advocacy-section {
         flex-direction: column;
+        align-items: stretch;               /* children fill the width instead of shrinking to content */
+        gap: 40px;
     }
 
-    .picture-box,
-    .gallery {
+    /* Stacked: the text column fills the row (needed so headings size correctly) */
+    .text-content {
         width: 100%;
-        max-width: 100%;
+        flex-basis: auto;
     }
 
-    /* Reduce section margins & padding so content has room */
-    .gallery-section,
-    .content-section,
-    .research-section {
-        width: 92%;
-        padding: 30px 20px;
+    /* When stacked, the circular headshot shouldn't stretch full width */
+    .picture-box {
+        flex: 0 0 auto;
+        width: min(400px, 85vw);
+        align-self: center;
     }
 
-    /* Scale down large section headings */
-    .gallery-section h2,
-    .research-section h2 {
-        font-size: 3rem;
-    }
-
-    /* Adjust gallery height for tablet viewports */
-    .gallery {
-        height: 500px;
+    /* Let media blocks fill the stacked column but stay centered */
+    .research-picture,
+    .advocacy-picture,
+    .advocacy-video {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 780px;
+        align-self: center;
     }
 }
 
-/* Mobile Phones (under 768px) */
+/* Phones (<= 768px) */
 @media (max-width: 768px) {
-    /* Tighten container padding for narrow screens */
-    .gallery-section,
-    .content-section,
-    .research-section {
-        width: 95%;
-        padding: 20px 12px;
-        margin: 15px auto;
+    /* Navbar: center the links and let them wrap onto multiple rows */
+    .navbar ul {
+        justify-content: center;
+        padding: 6px 12px;
+        gap: 4px 18px;
     }
 
-    /* Scale headings down for phone screens */
-    .gallery-section h2,
-    .research-section h2 {
-        font-size: 2rem;
-        margin-bottom: 15px;
+    .navbar a {
+        padding: 12px 0;
+        letter-spacing: 1px;
     }
 
-    /* Scale captions down */
-    .gallery-caption {
-        font-size: 1.1rem;
-        line-height: 1.3;
+    /* Publication card header stacks title above the date/bibcode */
+    .pub-header {
+        flex-direction: column;
+        gap: 6px;
     }
 
-    /* Reduce gallery height so it doesn't take up the whole screen on vertical phones */
-    .gallery {
-        height: 320px;
-        border-radius: 10px;
+    .pub-card {
+        padding: 18px 20px;
     }
 
-    /* Make carousel arrows touch-friendly and bring them slightly inward */
+    /* Carousel arrows: touch-friendly and tucked in */
     .gallery-arrow {
         width: 36px;
         height: 36px;
@@ -755,4 +788,25 @@ a {
     }
     .gallery-arrow.prev { left: 8px; }
     .gallery-arrow.next { right: 8px; }
+}
+
+/* Small phones (<= 600px) */
+@media (max-width: 600px) {
+    .hero-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Pull the banner overlap card up a little less on tiny screens */
+    .page-content {
+        margin-top: -50px;
+    }
+
+    #HL-Tau-Caption {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        max-width: none;
+        text-align: center;
+    }
 }
